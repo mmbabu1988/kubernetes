@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  - push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ "AKIAXDN244U7GYBH3HEA" }}
+          aws-secret-access-key: ${{"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"}}
+          aws-region: us-east-1
+
+      - name: Trigger deploy
+        uses: Consensys/kubernetes-action@main
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: apply deployment.yaml
