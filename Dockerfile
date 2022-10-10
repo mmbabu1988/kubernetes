@@ -11,7 +11,7 @@ COPY cmd cmd
 # build the source
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /bin/gitkube-controller cmd/gitkube-controller/main.go
 
-# use a minimal alpine image
+# use a minimal alpine image tag
 FROM alpine:3.7
 WORKDIR /bin
 # copy the binary from builder
